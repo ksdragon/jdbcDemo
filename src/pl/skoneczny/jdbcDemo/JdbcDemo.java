@@ -5,7 +5,9 @@
  */
 package pl.skoneczny.jdbcDemo;
 
-import javafx.scene.shape.Circle;
+
+import pl.skoneczny.jdbcDemo.doa.JdbcDoaImpl;
+import pl.skoneczny.jdbcDemo.model.Circle;
 
 /**
  *
@@ -17,7 +19,8 @@ public class JdbcDemo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Circle circle = new Circle();
+        Circle circle = new JdbcDoaImpl().getCircle(1);
+        System.out.println(circle.getName());
     }
     
 }
