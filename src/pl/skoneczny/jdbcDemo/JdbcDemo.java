@@ -5,17 +5,19 @@
  */
 package pl.skoneczny.jdbcDemo;
 
+import javafx.scene.shape.Circle;
+
 /**
  *
  * @author HP ProDesk
  */
-public class NewMain {
+public class JdbcDemo {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Circle circle = new Circle();
     }
     
 }
