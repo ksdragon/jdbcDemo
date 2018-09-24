@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<context:annotation-config/>
+<context:component-scan base-package="pl.skoneczny.jdbcDemo"/>
+
+
+<!--bean do połączneia z bazą korzysta z bibliotek springa można dodać username i passwosd--> 
+<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> wykorzystujemy inną kalasę  --> 
+<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+    <property name="url" value="jdbc:derby://localhost:1527/db" />
+    <property name="initialSize" value="2"/>
+    <!--maxymalna liczba połączń--> 
+    <property name="maxTotal" value="5"/>  
+</bean>
+
+</beans>

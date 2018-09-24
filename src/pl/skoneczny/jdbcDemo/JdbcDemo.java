@@ -6,7 +6,9 @@
 package pl.skoneczny.jdbcDemo;
 
 
-import pl.skoneczny.jdbcDemo.doa.JdbcDoaImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pl.skoneczny.jdbcDemo.doa.JdbcDaoImpl;
 import pl.skoneczny.jdbcDemo.model.Circle;
 
 /**
@@ -19,7 +21,14 @@ public class JdbcDemo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Circle circle = new JdbcDoaImpl().getCircle(1);
+//        tworzymy kontener i używamy takiej właściwości w pliku sping.xml która pozwala na skanowanie oznaconych 
+//        bibliotek @component @service @controler
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        
+        //pobieramy z kontenera bean i zaczynamy nim zarządzc
+        JdbcDaoImpl doa = ctx.getBean("jdbcDaoImpl", JdbcDaoImpl.class);
+        
+        Circle circle = doa.getCircle(1);
         System.out.println(circle.getName());
     }
     
