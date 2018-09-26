@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import pl.skoneczny.jdbcDemo.model.Circle;
 
@@ -71,6 +72,12 @@ public class JdbcDaoImpl {
         return jdbcTemplate.queryForObject(sql,new Object[] {circleId}, String.class);
     }
     
+    public Circle getCircleForId(int circleId){
+        String sql = "SELECT * FROM CIRCLE WHERE ID = ?";
+        // mapujemy kolumy z zapytanie do obiektu Circle przez użycie mapera 
+        return jdbcTemplate.queryForObject(sql, new Object[] {circleId}, new CircleMapper());
+    }
+    
     public DataSource getDataSource() {
         return dataSource;
     }
@@ -79,6 +86,21 @@ public class JdbcDaoImpl {
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+    
+    /*klasa na potrzeby metody getCircleForId() - trzeba obiektowi 
+      jdbcTemplate dostarczyć informacji jak ma przypisać dane z zapytania  
+    */
+    private static class CircleMapper implements RowMapper<Circle>{
 
+        @Override
+        public Circle mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+            Circle circle = new Circle();
+            circle.setId(resultSet.getInt("ID"));
+            circle.setName(resultSet.getString("NAME"));
+            return circle;
+        }
+    
+    
+    }
 
 }
