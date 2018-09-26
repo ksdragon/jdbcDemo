@@ -93,7 +93,7 @@ public class JdbcDaoImpl {
 //        String sql ="INSERT INTO CIRCLE (ID, NAME) VALUES (?, ?)";
 //        jdbcTemplate.update(sql, new Object[] {circle.getId(),circle.getName()});                
 //    }
-    
+    //używa biblioteki org.sprongframework.jdbc.core.namedparam - parametry zamiast placehoders
     public void insertCircle(Circle circle){
         String sql ="INSERT INTO CIRCLE (ID, NAME) VALUES (:id, :name)";
         SqlParameterSource namedParameter = new MapSqlParameterSource("id",circle.getId())
