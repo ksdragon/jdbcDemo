@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -76,6 +77,12 @@ public class JdbcDaoImpl {
         String sql = "SELECT * FROM CIRCLE WHERE ID = ?";
         // mapujemy kolumy z zapytanie do obiektu Circle przez użycie mapera 
         return jdbcTemplate.queryForObject(sql, new Object[] {circleId}, new CircleMapper());
+    }
+    
+    
+    public List<Circle> getAllCircles(){
+        String sql = "SELECT * FROM CIRCLE";
+        return jdbcTemplate.query(sql, new CircleMapper());
     }
     
     public DataSource getDataSource() {
