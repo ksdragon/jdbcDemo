@@ -9,6 +9,7 @@ package pl.skoneczny.jdbcDemo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pl.skoneczny.jdbcDemo.dao.JdbcDaoImpl;
+import pl.skoneczny.jdbcDemo.dao.SimpleJdbcDaoImpl;
 import pl.skoneczny.jdbcDemo.model.Circle;
 
 /**
@@ -34,9 +35,13 @@ public class JdbcDemo {
           //System.out.println(dao.getCircleName(1));
           //System.out.println(dao.getCircleForId(1).getName());
           //System.out.println(dao.getAllCircles().size());
-          dao.insertCircle(new Circle(3,"Thrid Circle"));
+          dao.insertCircle(new Circle(4,"Fouth Circle"));
           System.out.println(dao.getAllCircles().size());
           //dao.createTriangleTable();
+          
+          SimpleJdbcDaoImpl sdao = ctx.getBean("simpleJdbcDaoImpl", SimpleJdbcDaoImpl.class);        
+          System.out.println(sdao.getCircleCount());
+                  
     }
     
 }
