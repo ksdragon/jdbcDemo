@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.skoneczny.jdbcDemo.doa;
+package pl.skoneczny.jdbcDemo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import pl.skoneczny.jdbcDemo.model.Circle;
 
@@ -25,6 +27,8 @@ public class JdbcDaoImpl {
     // automatycznie toworzy instancję dataSourse i łączny się z bazą
     @Autowired
     private DataSource dataSource;
+    // pochodzi ze springa
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
     
     
     public Circle getCircle(int circleId){    
@@ -56,6 +60,12 @@ public class JdbcDaoImpl {
             }
         }
     };
+    
+    public int getCircleCount(){
+        String sql = "SELECT COUNT(*) FROM CIRCLE";
+        jdbcTemplate.setDataSource(getDataSource());
+        return jdbcTemplate.queryForInt(sql);        
+    }
     
     public DataSource getDataSource() {
         return dataSource;
