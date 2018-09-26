@@ -28,9 +28,9 @@ public class JdbcDaoImpl {
     // automatycznie toworzy instancję dataSourse i łączny się z bazą
    
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    private JdbcTemplate jdbcTemplate;
     
-    
+/**    
     public Circle getCircle(int circleId){    
         Connection conn = null;
         try {
@@ -59,7 +59,7 @@ public class JdbcDaoImpl {
             } catch (SQLException e) {
             }
         }
-    };
+    };*/
     
     
     public int getCircleCount(){
@@ -83,6 +83,12 @@ public class JdbcDaoImpl {
     public List<Circle> getAllCircles(){
         String sql = "SELECT * FROM CIRCLE";
         return jdbcTemplate.query(sql, new CircleMapper());
+    }
+    
+    public void insertCircle(Circle circle){
+        String sql ="INSERT INTO CIRCLE (ID, NAME) VALUES (?, ?)";
+        jdbcTemplate.update(sql, new Object[] {circle.getId(),circle.getName()});
+                
     }
     
     public DataSource getDataSource() {
