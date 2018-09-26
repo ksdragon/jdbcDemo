@@ -8,7 +8,7 @@ package pl.skoneczny.jdbcDemo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import pl.skoneczny.jdbcDemo.doa.JdbcDaoImpl;
+import pl.skoneczny.jdbcDemo.dao.JdbcDaoImpl;
 import pl.skoneczny.jdbcDemo.model.Circle;
 
 /**
@@ -26,9 +26,9 @@ public class JdbcDemo {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         
         //pobieramy z kontenera bean i zaczynamy nim zarządzc
-        JdbcDaoImpl doa = ctx.getBean("jdbcDaoImpl", JdbcDaoImpl.class);
+        JdbcDaoImpl dao = ctx.getBean("jdbcDaoImpl", JdbcDaoImpl.class);
         
-        Circle circle = doa.getCircle(1);
+        Circle circle = dao.getCircle(1);
         System.out.println(circle.getName());
     }
     
